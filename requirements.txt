@@ -1,0 +1,8 @@
+Django==1.5.1
+ipython==0.13.2
+psycopg2==2.5
+readline==6.2.4.1
+requests==1.2.0
+wsgiref==0.1.2
+xlrd==0.7.3
+xlwt==0.7.5
