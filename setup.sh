@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-dropdb problembuildings
-createdb -T template_postgis problembuildings
+dropdb maptrap
+createdb -T template_postgis maptrap
 ./manage.py syncdb --noinput
 ./manage.py LoadFootprints
