@@ -1,5 +1,53 @@
 {% extends "base.html" %}
+{% block extra_head %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/jquery.geocodify.css' %}" />
+{% endblock %}
     {% block content %}    
-    <h3>A home page</h3>
-    <p>what goes here?</p>
+    <h3>Download</h3>
+    <p>
+        Enter an address to get a spreadsheet of buildings:
+        <form id="geocoder">
+            
+        </form>
+    </p>
+    <h3>Upload</h3>
+    <p>
+        Upload an annotated spreadsheet to batch report community concerns.
+        <form>
+            <label for="reporter_email">Reporter email</label><input type="email" id="reporter_email"></input>
+            <label for="datafile">Spreadsheet (created above)</label><input id="datafile" type="file"></input>
+        </form>
+    </p>
+    {% endblock %}
+    
+    {% block extra_scripts %}
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/datadesk/jquery-geocodify/master/jquery.geocodify.js"></script>
+    <script type="text/javascript">
+        $("#geocoder").geocodify({
+            onSelect: function (result) { alert(result); window.result = result; },
+            viewportBias: new google.maps.LatLngBounds(
+                new google.maps.LatLng( 41.643919,-87.9401010000001),
+                new google.maps.LatLng(42.023135,-87.523661 )
+            ),
+            noResultsText: "No address suggestions... keep typing...",
+            filterResults: function(results) {
+                var filteredResults =[];
+                $.each(results, function(i,val) {
+                    for (var ac in val.address_components) {
+                        for (var t in val.address_components[ac].types) {
+                            if (val.address_components[ac].types[t] === 'locality') {
+                                if (val.address_components[ac].long_name === 'Chicago') {
+                                    filteredResults.push(val);
+                                }
+                            }
+                        }
+                    }
+                });
+                return filteredResults;
+            }
+        });
+    </script>
     {% endblock %}
