@@ -5,6 +5,7 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'core.views.index', name='index'),
     # Examples:
     # url(r'^$', 'maptrap.views.home', name='home'),
     # url(r'^maptrap/', include('maptrap.foo.urls')),

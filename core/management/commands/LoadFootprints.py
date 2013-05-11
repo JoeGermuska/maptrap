@@ -63,7 +63,7 @@ class Command(BaseCommand):
          # The mapping is a dictionary
         datafile = os.path.join(os.path.curdir,'data/Building_Footprints/Buildings.shp')
         lm = LayerMapping(Footprint, datafile, mapping)
-        lm.save(strict=True,progress=True,fid_range=(1,50000)) # Save the layermap, imports the data.
-        print "Only loaded 50,000 right now don't be fooled!"
+        lm.save(strict=True,progress=True,fid_range=(1,1000)) # Save the layermap, imports the data.
+        print "Only loaded 1000 right now don't be fooled!"
 
 
